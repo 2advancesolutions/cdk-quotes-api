@@ -18,11 +18,17 @@ export class CdkQuotesApiStack extends cdk.Stack {
     
     // create api gateway api
     const api = new RestApi(this, 'quotes-api', {
-      description: 'Quotes Api',
+      description: ' quotes Api',
     });
    
     // define the path call api
     const mainPath = api.root.addResource("quotes");
     mainPath.addMethod("GET", new LambdaIntegration(getQuotes)); 
+    
+    // Enable CORS on the resource
+    mainPath.addCorsPreflight({
+      allowOrigins: ['*'],
+      allowMethods: ['GET'],
+    });
   }
 }
