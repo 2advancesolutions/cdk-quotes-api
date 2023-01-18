@@ -5,12 +5,16 @@ import {
   Tr,
   Td,
   Input,
+  Badge,
+  Avatar,
+  Box,
+  Flex,Text
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react';
 
 interface Quote {
   id: number;
-  quote: string;
+  text: string;
   author: string;
 }
 
@@ -20,7 +24,6 @@ const Quotes: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [filteredQuotes, setFilteredQuotes] = useState<Quote[]>([]);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,16 +85,44 @@ const Quotes: React.FC = () => {
             {filteredQuotes.length > 0 ? (
               filteredQuotes.map((quote: Quote) => (
                 <Tr key={quote.id}>
-                  <Td>{quote.id}</Td>
-                  <Td>{quote.quote}</Td>
+                  
+                  <Td>
+                  
+                    <Flex>
+                      <Avatar src='https://bit.ly/sage-adebayo' />
+                      <Box ml='3'>
+                        <Text fontWeight='bold'>
+                          {quote.author}
+                          <Badge ml='1' colorScheme='green'>
+                            New
+                          </Badge>
+                        </Text>
+                        <Text fontSize='sm'>UI Engineer</Text>
+                      </Box>
+                    </Flex>
+                  </Td>
+                  <Td>{quote.text}</Td>
                   <Td>{quote.author}</Td>
                 </Tr>
               ))
             ) : (
               quotes.map((quote: Quote) => (
                 <Tr key={quote.id}>
-                  <Td>{quote.id}</Td>
-                  <Td>{quote.quote}</Td>
+                  <Td>
+                  <Flex>
+                    <Avatar src='https://bit.ly/sage-adebayo' />
+                    <Box ml='3'>
+                      <Text fontWeight='bold'>
+                        {quote.author}
+                        <Badge ml='1' colorScheme='green'>
+                          New
+                        </Badge>
+                      </Text>
+                      <Text fontSize='sm'>UI Engineer</Text>
+                    </Box>
+                  </Flex>
+                </Td>
+                  <Td>{quote.text}</Td>
                   <Td>{quote.author}</Td>
                 </Tr>
               ))
